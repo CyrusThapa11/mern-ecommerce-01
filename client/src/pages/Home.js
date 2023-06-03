@@ -6,8 +6,12 @@ import Slider from "../components/Slider";
 import Products from "../components/Products";
 import NewsLetter from "../components/NewsLetter";
 import Footer from "../components/Footer";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const user = useSelector((state) => state.user);
+
+  console.log("user is :", user);
   return (
     <div>
       <Navbar />

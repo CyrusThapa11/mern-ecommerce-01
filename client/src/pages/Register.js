@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { mobile, tablet } from "../responsive";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../redux/userReducer";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   width: 100vw;
@@ -55,22 +59,81 @@ const Button = styled.button`
 `;
 
 const Register = () => {
+  const [User, setUser] = useState(null);
+  const dispatch = useDispatch();
+  // const { isFetching, error } = useSelector((state) => state);
+  const navigate = useNavigate();
+  const UserRegister = async (e) => {
+    console.log("UserRegister");
+    try {
+      e.preventDefault();
+      const response = await axios.post(
+        "http://localhost:5000/auth/register",
+        User
+      );
+      console.log("response - ", response);
+      dispatch(registerUser(response.data));
+      console.log(" navigating ! ");
+      navigate("/");
+
+      // setProducts(respo.data);
+    } catch (err) {
+      console.log("ERROR1 - ", err);
+    }
+  };
+
   return (
     <Container>
       <Wrapper>
         <Title>Create an Account</Title>
         <Form>
-          <Input placeholder="First Name" />
-          <Input placeholder="Last Name" />
-          <Input placeholder="Username" />
-          <Input placeholder="Email" />
-          <Input placeholder="Password" />
-          <Input placeholder="Confirm Password" />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="Firstname"
+            placeholder="First Name"
+          />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="Lastname"
+            placeholder="Last Name"
+          />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="username"
+            placeholder="Username"
+          />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="email"
+            placeholder="Email"
+          />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="password"
+            placeholder="Password"
+          />
+          <Input
+            onChange={(e) =>
+              setUser({ ...User, [e.target.name]: e.target.value })
+            }
+            name="confirmPassword"
+            placeholder="Confirm Password"
+          />
           <Agreement>
             By creating an account , I consent to the processing of my personal
             data in accordance with the <b>PRIVACY POLICY</b>
           </Agreement>
-          <Button>Create</Button>
+          <Button onClick={UserRegister}>Create</Button>
         </Form>
       </Wrapper>
     </Container>

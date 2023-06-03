@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { pulicRequest } from "../requestMethod";
 import { addProducts } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const Container = styled.div``;
 
@@ -141,7 +142,9 @@ const Product = () => {
     console.log("id: ", id);
 
     const getProduct = async () => {
-      const result = await pulicRequest.get(`/products/find/${id}`);
+      const result = await axios.get(
+        `http://localhost:5000/products/find/${id}`
+      );
       console.log("product --", result);
       setProduct(result.data);
     };

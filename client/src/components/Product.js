@@ -4,7 +4,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { Link, useLocation } from "react-router-dom";
-import { pulicRequest } from "../requestMethod";
+// import { pulicRequest } from "../requestMethod";
 
 // must be defined before
 // to use hover effect !

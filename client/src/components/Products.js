@@ -19,21 +19,20 @@ const Products = ({ filters, sort, cat }) => {
 
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
-
+  const getProducts = async () => {
+    try {
+      const respo = await axios.get(
+        cat
+          ? `http://localhost:5000/products?category=${cat}`
+          : "http://localhost:5000/products"
+      );
+      // console.log("respo - ", respo);
+      setProducts(respo.data);
+    } catch (err) {
+      console.log("ERROR1 - ", err);
+    }
+  };
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const respo = await axios.get(
-          cat
-            ? `https://react-server-ecom.herokuapp.com/products?category=${cat}`
-            : "https://react-server-ecom.herokuapp.com/products"
-        );
-        // console.log("respo - ", respo);
-        setProducts(respo.data);
-      } catch (err) {
-        console.log("ERROR1 - ", err);
-      }
-    };
     getProducts();
   }, [cat]);
 

@@ -194,6 +194,7 @@ const Button = styled.button`
 
 const Cart = () => {
   const cartt = useSelector((state) => state.cartttt);
+  const userr = useSelector((state) => state.user);
   console.log("cartt", cartt);
   const [stripeToken, setStripeToken] = useState(null);
   const onToken = (token) => {
@@ -210,7 +211,7 @@ const Cart = () => {
         // const res = await userRequest.post("/checkout/payment", );
 
         const res = await axios.post(
-          "https://react-server-ecom.herokuapp.com/checkout/payment",
+          "http://localhost:5000/checkout/payment",
           {
             tokenId: stripeToken.id,
             amount: 3000,
@@ -303,18 +304,32 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>${cartt.total} </SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="Vinsmoke Shop"
-              image="https://i.pinimg.com/originals/29/12/d5/2912d5015c57774cedf4d82bb03372d7.jpg"
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cartt.total}`}
-              amount={cartt.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>Checkout Now</Button>
-            </StripeCheckout>
+            {userr && userr.currentUser && userr.currentUser.accessToken ? (
+              <>
+                <StripeCheckout
+                  name="Vinsmoke Shop"
+                  image="https://i.pinimg.com/originals/29/12/d5/2912d5015c57774cedf4d82bb03372d7.jpg"
+                  billingAddress
+                  shippingAddress
+                  description={`Your total is $${cartt.total}`}
+                  amount={cartt.total * 100}
+                  token={onToken}
+                  stripeKey={KEY}
+                >
+                  <Button>Checkout Now</Button>
+                </StripeCheckout>
+              </>
+            ) : (
+              <Button
+                style={{
+                  backgroundColor: "#EA5455",
+                  fontWeight: "bold",
+                  pointerEvents: "none",
+                }}
+              >
+                You must be loggedIn
+              </Button>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>

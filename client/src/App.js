@@ -6,11 +6,12 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import { Link, Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 
 function App() {
-  const user = useSelector((state) => state.user.currenUser);
-
-  console.log("user is :", user);
+  let user = true;
+  let state = useSelector((state) => state);
+  console.log("state is :", state);
 
   return (
     <BrowserRouter>
@@ -19,17 +20,11 @@ function App() {
         <Route exact path="/products/:category" element={<ProductList />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/product/:id" element={<Product />} />
-        <Route
-          exact
-          path="/login"
-          element={user ? <Navigate to="/" /> : <Login />}
-        />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/success" element={<PaymentSuccessPage />} />
 
-        <Route
-          exact
-          path="/register"
-          element={user ? <Navigate to="/" /> : <Register />}
-        />
+        <Route exact path="/register" element={<Register />} />
+        {/* <Route exact path="/register" element={<Register />} /> */}
       </Routes>
     </BrowserRouter>
   );

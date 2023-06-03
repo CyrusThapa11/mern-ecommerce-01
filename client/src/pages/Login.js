@@ -3,7 +3,71 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { login } from "../redux/apiCalls";
 import { mobile, tablet } from "../responsive";
+import axios from "axios";
+import { registerUser } from "../redux/userReducer";
+import { useNavigate } from "react-router-dom";
 
+const Login = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector((state) => state.user);
+  const handleclick = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("sending !!");
+      // login(dispatch, { username, password });
+
+      const response = await axios.post("http://localhost:5000/auth/login", {
+        username,
+        password,
+      });
+      console.log("response in login - ", response);
+      dispatch(registerUser(response.data));
+      console.log(" navigating ! ");
+      navigate("/");
+      // console.log("res.data --> ", res.data);
+      // dispatch(loginSuccess(res.data));
+    } catch (err) {
+      // dispatch(loginFailure());
+      console.log(" error in login is ", err);
+    }
+
+    console.log("sent !! ");
+  };
+
+  return (
+    <Container>
+      <Wrapper>
+        <Title>Sign In</Title>
+        <Form>
+          <Input
+            placeholder="Username"
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="Password"
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
+          <Button onClick={handleclick} disabled={isFetching}>
+            Login
+          </Button>
+
+          {error && <Error>Something went wrong</Error>}
+          <Link>Forgot Password</Link>
+          <Link>Create a new account</Link>
+        </Form>
+      </Wrapper>
+    </Container>
+  );
+};
+
+export default Login;
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
@@ -65,46 +129,3 @@ const Link = styled.a`
 const Error = styled.span`
   color: red;
 `;
-
-const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const { isFetching, error } = useSelector((state) => state.user);
-  const handleclick = (e) => {
-    e.preventDefault();
-    console.log("sending !!");
-    login(dispatch, { username, password });
-    console.log("sent !! ");
-  };
-
-  return (
-    <Container>
-      <Wrapper>
-        <Title>Sign In</Title>
-        <Form>
-          <Input
-            placeholder="Username"
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input
-            placeholder="Password"
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-
-          <Button onClick={handleclick} disabled={isFetching}>
-            Login
-          </Button>
-
-          {error && <Error>Something went wrong</Error>}
-          <Link>Forgot Password</Link>
-          <Link>Create a new account</Link>
-        </Form>
-      </Wrapper>
-    </Container>
-  );
-};
-
-export default Login;

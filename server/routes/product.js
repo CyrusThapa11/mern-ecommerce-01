@@ -9,6 +9,7 @@ const {
 } = require("./verify");
 
 // CREATE !!
+
 router.post("/", verifyAuthorizationAndAdmin, async (req, res) => {
   const newProduct = new Product(req.body);
   console.log("newProduct", newProduct);
@@ -22,6 +23,7 @@ router.post("/", verifyAuthorizationAndAdmin, async (req, res) => {
 });
 
 // update !!
+
 router.put("/:id", verifyAuthorizationAndAdmin, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(

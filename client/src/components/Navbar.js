@@ -3,9 +3,10 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import { Badge } from "@mui/material";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import { logoutUser } from "../redux/userReducer";
 
 const Container = styled.div`
   height: 60px;
@@ -78,6 +79,13 @@ const MenuItem = styled.div`
 const Navbar = () => {
   const quantity = useSelector((state) => state.cartttt.quantity);
   console.log("quantity", quantity);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  const LogoutUser = async () => {
+    dispatch(logoutUser());
+    console.log("LogoutUser", LogoutUser);
+  };
 
   return (
     <Container>
@@ -92,15 +100,32 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>Vinsmoke</Logo>
+          <Link to="/">
+            <Logo>Vinsmoke</Logo>
+          </Link>
         </Center>
         <Right>
-          <Link to="/register">
-            <MenuItem>Register</MenuItem>
-          </Link>
-          <Link to="/login">
-            <MenuItem>Log in</MenuItem>
-          </Link>
+          {user && user.currentUser && user.currentUser.accessToken ? (
+            <> </>
+          ) : (
+            <Link to="/register">
+              <MenuItem>Register</MenuItem>
+            </Link>
+          )}
+          {user && user.currentUser && user.currentUser.accessToken ? (
+            <></>
+          ) : (
+            <Link to="/login">
+              <MenuItem>Log in</MenuItem>
+            </Link>
+          )}
+          {user && user.currentUser && user.currentUser.accessToken ? (
+            <>
+              <button onClick={LogoutUser}>LOGOUT</button>
+            </>
+          ) : (
+            <></>
+          )}
           <Link to="/cart">
             <MenuItem>
               <Badge badgeContent={quantity} color="secondary">
