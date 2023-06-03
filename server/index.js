@@ -14,16 +14,16 @@ const cors = require("cors");
 // utils:
 
 dotenv.config();
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
 app.use(
   cors({
     origin: "*",
     credentials: true,
   })
 );
+app.use(cors());
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 console.log("process.env.MONGO_URL", process.env.MONGO_URL);
 mongoose
