@@ -84,10 +84,9 @@ const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>Lama</Logo>
+        <Logo>Laviya Hina Brands</Logo>
         <Desc>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum error
-          nobis iure optio, temporibus sapiente saepe aut iusto modi adipisci?
+        I want my wardrobe to be full of good clothes, so that when I'm deciding what to wear, I don't run out of options. I love shopping!
         </Desc>
         <SocialContainer>
           <SocialIcon color="3B5999">
@@ -125,17 +124,17 @@ const Footer = () => {
         <Title>Contact</Title>
         <ContactItem>
           {" "}
-          <RoomIcon style={{ marginRight: "10px" }} /> 731 Dixie Path , South
-          Torontoo
+          <RoomIcon style={{ marginRight: "10px" }} /> 904 Devika Gold Homes
+          Noida
         </ContactItem>
         <ContactItem>
           {" "}
-          <LocalPhoneIcon style={{ marginRight: "10px" }} /> +2 123 83 02{" "}
+          <LocalPhoneIcon style={{ marginRight: "10px" }} /> +91 844 897 6657{" "}
         </ContactItem>
         <ContactItem>
           {" "}
           <MailOutlineOutlinedIcon style={{ marginRight: "10px" }} />{" "}
-          contact@vismoke Sanji
+          anamika8448976657@gmail.com
         </ContactItem>
 
         <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />

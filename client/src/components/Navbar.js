@@ -101,7 +101,7 @@ const Navbar = () => {
         </Left>
         <Center>
           <Link to="/">
-            <Logo>Vinsmoke</Logo>
+            <Logo>Laviya Hina Brands</Logo>
           </Link>
         </Center>
         <Right>

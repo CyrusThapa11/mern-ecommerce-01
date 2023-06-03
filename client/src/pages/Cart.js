@@ -307,7 +307,7 @@ const Cart = () => {
             {userr && userr.currentUser && userr.currentUser.accessToken ? (
               <>
                 <StripeCheckout
-                  name="Vinsmoke Shop"
+                  name="LVShop"
                   image="https://i.pinimg.com/originals/29/12/d5/2912d5015c57774cedf4d82bb03372d7.jpg"
                   billingAddress
                   shippingAddress
