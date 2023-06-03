@@ -19,6 +19,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+console.log("process.env.MONGO_URL", process.env.MONGO_URL);
+mongoose
+  .connect(`${process.env.MONGO_URL}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDB Connected…");
+  })
+  .catch((err) => {
+    console.log(err);
+    // console.log("err.reason.servers", err.reason);
+  });
+
 app.use("/user", userRoutes);
 app.use("/auth", authRoutes);
 app.use("/products", productRoutes);
@@ -26,25 +40,18 @@ app.use("/cart", cartRoutes);
 app.use("/orders", orderRoutes);
 app.use("/checkout", paymentRoutes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client/build")));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(path.join(__dirname, "client/build")));
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "index.html"));
-  });
-}
-
-mongoose
-  .connect(process.env.MONGO_URL)
-  .then(() => {
-    console.log("Connected to db");
-  })
-  .catch((err) => {
-    console.log("error1 - is -> ", err);
-  });
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "client/build", "index.html"));
+//   });
+// }
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`server at http://localhost:${PORT}/`);
 });
+
+// GIT PUSH -F ORIGIN MASTER -> FORCED UPDATE !
