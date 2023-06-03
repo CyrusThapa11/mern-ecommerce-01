@@ -52,8 +52,7 @@ const NewsLetter = () => {
     <Container>
       <Title> NewsLetter </Title>
       <Description>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-        explicabo ut cum ipsa dolor.
+      I'm more for the style than the brand. I don't go brand shopping; I go detail shopping.
       </Description>
 
       <InputContainer>
