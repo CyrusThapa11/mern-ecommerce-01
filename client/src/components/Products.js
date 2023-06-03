@@ -23,8 +23,8 @@ const Products = ({ filters, sort, cat }) => {
     try {
       const respo = await axios.get(
         cat
-          ? `http://localhost:5000/products?category=${cat}`
-          : "http://localhost:5000/products"
+          ? `https://project-1-3a6s.onrender.com/products?category=${cat}`
+          : "https://project-1-3a6s.onrender.com/products"
       );
       // console.log("respo - ", respo);
       setProducts(respo.data);

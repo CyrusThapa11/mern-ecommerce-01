@@ -20,10 +20,13 @@ const Login = () => {
       console.log("sending !!");
       // login(dispatch, { username, password });
 
-      const response = await axios.post("http://localhost:5000/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://project-1-3a6s.onrender.com/auth/login",
+        {
+          username,
+          password,
+        }
+      );
       console.log("response in login - ", response);
       dispatch(registerUser(response.data));
       console.log(" navigating ! ");

@@ -68,7 +68,7 @@ const Register = () => {
     try {
       e.preventDefault();
       const response = await axios.post(
-        "http://localhost:5000/auth/register",
+        "https://project-1-3a6s.onrender.com/auth/register",
         User
       );
       console.log("response - ", response);

@@ -143,7 +143,7 @@ const Product = () => {
 
     const getProduct = async () => {
       const result = await axios.get(
-        `http://localhost:5000/products/find/${id}`
+        `https://project-1-3a6s.onrender.com/products/find/${id}`
       );
       console.log("product --", result);
       setProduct(result.data);

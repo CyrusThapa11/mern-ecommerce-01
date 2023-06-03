@@ -211,7 +211,7 @@ const Cart = () => {
         // const res = await userRequest.post("/checkout/payment", );
 
         const res = await axios.post(
-          "http://localhost:5000/checkout/payment",
+          "https://project-1-3a6s.onrender.com/checkout/payment",
           {
             tokenId: stripeToken.id,
             amount: 3000,
