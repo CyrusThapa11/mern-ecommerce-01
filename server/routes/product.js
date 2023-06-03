@@ -10,7 +10,7 @@ const {
 
 // CREATE !!
 
-router.post("/", verifyAuthorizationAndAdmin, async (req, res) => {
+router.post("/", async (req, res) => {
   const newProduct = new Product(req.body);
   console.log("newProduct", newProduct);
   try {
@@ -24,7 +24,7 @@ router.post("/", verifyAuthorizationAndAdmin, async (req, res) => {
 
 // update !!
 
-router.put("/:id", verifyAuthorizationAndAdmin, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -44,7 +44,7 @@ router.put("/:id", verifyAuthorizationAndAdmin, async (req, res) => {
 });
 
 // delete product
-router.delete("/:id", verifyAuthorization, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
 
