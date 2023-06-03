@@ -13,6 +13,7 @@ const cors = require("cors");
 
 // utils:
 
+const app = express();
 dotenv.config();
 app.use(
   cors({
@@ -21,7 +22,6 @@ app.use(
   })
 );
 app.use(cors());
-const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
